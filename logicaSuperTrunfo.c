@@ -1,17 +1,25 @@
 #include <stdio.h>
 
 
+/*
+Definição dos tipos das variáveis utilizadas
+*/
 int main() {
     char estado1, estado2;
     char codigo1[4], codigo2[4];
     char cidade1[50], cidade2[50];
-    unsigned long int populacao1, populacao2;
+    int populacao1, populacao2;
     float area1, area2;
     float pib1, pib2;
     int pontos_turisticos1, pontos_turisticos2;
     float densidadepopulacional1, densidadepopulacional2;
     float pibpercapita1, pibpercapita2;
+    int resultado1, resultado2;
+    int primeiroAtributo, segundoAtributo;
     
+    /*
+    Criação dos prompts de entradas para a função scanf para guardar os valores para as variáveis
+    */
 
     printf("Cadastro da Carta 1:\n");
     printf("Estado (A-H): ");
@@ -48,7 +56,7 @@ int main() {
     scanf(" %d", &pontos_turisticos2);
     densidadepopulacional2 = populacao2 / area2;
     pibpercapita2 = (pib2 * 1000000000.0f) / populacao2;
-
+// Trecho que imprimi todas as informações de entradas de valores das variáveis para as Cartas 1 e 2
     printf("\nCarta 1:\n");
     printf("Estado: %c\n", estado1);
     printf("Código: %s\n", codigo1);
@@ -71,83 +79,86 @@ int main() {
     printf("Densidade Populacional: %.2f hab/km²\n", densidadepopulacional2);
     printf("O PIB per Capita é: %.2f reais\n", pibpercapita2);
 
-    int escolha;
-    printf("\nEscolha o atributo para comparar:\n");
-    printf("1. População\n");
-    printf("2. Área\n");
-    printf("3. PIB\n");
-    printf("4. Número de Pontos Turísticos\n");
-    printf("5. Densidade Demográfica\n");
-    printf("Digite sua escolha (1-5): ");
-    scanf("%d", &escolha);
+    // Início do Jogo
+    printf("\nBem-vindo ao jogo!\n");
+    printf("Escolha o primeiro atributo.\n");
+    printf("1. Populacão\n");
+    printf("2. Area\n");
+    printf("3. Densidade Populacional\n");
 
-    printf("\nComparando %s e %s...\n", cidade1, cidade2);
+    printf("Escolha a comparação:\n");
+    scanf("%d", &primeiroAtributo);
+/*
+Definição dos testes lógicos para os 2 switches criados para os testes dos 2 atributos e definições do valores dos resultados
+*/
+    switch(primeiroAtributo) {
+    case 1:
+    printf("Você escolheu a opção População!\n");
+    resultado1 = populacao1 > populacao2 ? 1 : 0;
+    break;
 
-    switch(escolha) {
-        case 1:
-            printf("Atributo: População\n");
-            printf("%s: %lu\n", cidade1, populacao1);
-            printf("%s: %lu\n", cidade2, populacao2);
-            if (populacao1 > populacao2)
-                printf("Vencedora: %s\n", cidade1);
-            else if (populacao2 > populacao1)
-                printf("Vencedora: %s\n", cidade2);
-            else
-                printf("Empate!\n");
-            break;
+    case 2:
+    printf("Você escolheu a opção Area!\n");
+    resultado1 = area1 > area2 ? 1 : 0;
+    break;
 
-        case 2:
-            printf("Atributo: Área\n");
-            printf("%s: %.2f km²\n", cidade1, area1);
-            printf("%s: %.2f km²\n", cidade2, area2);
-            if (area1 > area2)
-                printf("Vencedora: %s\n", cidade1);
-            else if (area2 > area1)
-                printf("Vencedora: %s\n", cidade2);
-            else
-                printf("Empate!\n");
-            break;
-
-        case 3:
-            printf("Atributo: PIB\n");
-            printf("%s: %.2f bilhões de reais\n", cidade1, pib1);
-            printf("%s: %.2f bilhões de reais\n", cidade2, pib2);
-            if (pib1 > pib2)
-                printf("Vencedora: %s\n", cidade1);
-            else if (pib2 > pib1)
-                printf("Vencedora: %s\n", cidade2);
-            else
-                printf("Empate!\n");
-            break;
-
-        case 4:
-            printf("Atributo: Número de Pontos Turísticos\n");
-            printf("%s: %d\n", cidade1, pontos_turisticos1);
-            printf("%s: %d\n", cidade2, pontos_turisticos2);
-            if (pontos_turisticos1 > pontos_turisticos2)
-                printf("Vencedora: %s\n", cidade1);
-            else if (pontos_turisticos2 > pontos_turisticos1)
-                printf("Vencedora: %s\n", cidade2);
-            else
-                printf("Empate!\n");
-            break;
-
-        case 5:
-            printf("Atributo: Densidade Demográfica\n");
-            printf("%s: %.2f hab/km²\n", cidade1, densidadepopulacional1);
-            printf("%s: %.2f hab/km²\n", cidade2, densidadepopulacional2);
-            if (densidadepopulacional1 < densidadepopulacional2)
-                printf("Vencedora: %s (menor densidade)\n", cidade1);
-            else if (densidadepopulacional2 < densidadepopulacional1)
-                printf("Vencedora: %s (menor densidade)\n", cidade2);
-            else
-                printf("Empate!\n");
-            break;
-
-        default:
-            printf("Opção inválida.\n");
-            break;
+    case 3:
+    printf("Você escolheu a opção Densidade Populacional!\n");
+    resultado1 = densidadepopulacional1 < densidadepopulacional2 ? 1 : 0;
+    break;
+    default :
+    printf("Opção de jogo inválida\n");
+    break;
     }
 
+    printf("Escolha o segundo atributo.\n");
+    printf("Atenção: Você deve escolher um atributo diferente do primeiro!\n");
+    printf("1. População\n");
+    printf("2. Area\n");
+    printf("3. Densidade Populacional\n");
+
+    printf("Escolha a comparação:\n");
+    scanf("%d", &segundoAtributo);
+
+    if (primeiroAtributo == segundoAtributo){
+        printf("Você escolheu o mesmo atributo\n");
+    } else {
+        switch (segundoAtributo) {
+    case 1:
+    printf("Você escolheu a opção População!\n");
+    resultado2 = populacao1 > populacao2 ? 1 : 0;
+    break;
+
+    case 2:
+    printf("Você escolheu a opção Area!\n");
+    resultado2 = area1 > area2 ? 1 : 0;
+    break;
+
+    case 3:
+    printf("Você escolheu a opção Densidade Populacional!\n");
+    resultado2 = densidadepopulacional1 < densidadepopulacional2 ? 1 : 0;
+    break;
+    default :
+    printf("Opção de jogo inválida\n");
+    break;
+    }
+
+        }
+// Trecho de código demonstrativo para informar os dados finais processados e declaração de qual carta venceu o jogo !
+        printf("\nComparando %s e %s...\n", cidade1, cidade2);
+        printf("População: %d: x %d\n",populacao1, populacao2);
+        printf("Area: %f x %f\n",area1, area2);
+        printf("Densidade Populacional: %f x %f\n",densidadepopulacional1, densidadepopulacional2);
+        printf("Resultado1: %d\n", resultado1);
+        printf("Resultado2: %d\n", resultado2);
+    if (resultado1 && resultado2 == 1){ 
+    printf("\nParabéns, Carta 1 venceu!\n");
+    }  else if (resultado1 != resultado2){
+        printf("Empatou!\n");
+    } else {
+        printf("A Carta 2 venceu!\n");
+    }
+    
+    
     return 0;
 }
